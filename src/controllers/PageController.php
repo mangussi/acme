@@ -6,12 +6,6 @@ use Acme\Models\Page;
 
 class PageController extends BaseController
 {
-    public function getShowLoginPage()
-    {
-        // include(__DIR__. "/../../views/login.html");
-        // echo $this->twig->render('login.html');
-        echo $this->blade->render("login");
-    }
 
     public function getShowHomePage()
     {
