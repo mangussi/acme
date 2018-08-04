@@ -26,7 +26,8 @@ class RegisterController extends BaseController
         $validation_data = [
           'first_name' => 'min:3',
           'last_name' => 'min:3',
-          'email' => 'email|equalTo:verify_email',
+          'email' => 'email|equalTo:verify_email|unique:User',
+          'verify_email' => 'email',
           'password' => 'min:3|equalTo:verify_password',
         ];
 

@@ -21,12 +21,12 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
         >
 
-        <link
-          rel="stylesheet"
-          href="/assets/style.css"
-        >
-          <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
-          @yield('css')
+          <link
+            rel="stylesheet"
+            href="/assets/style.css"
+          >
+            <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+            @yield('css')
 
   </head>
 
@@ -34,7 +34,6 @@
 
 
     @include('topnav')
-
     @yield('outsidecontainer')
 
     <div class="container">
@@ -48,22 +47,23 @@
 
     </div>
 
-    <div class="row footer-background " >
-      <div class="col-md-3" >
+    <div class="row footer-background ">
+      <div class="col-md-3">
         <div class="padding-left-8px ">
-          <h4>Contact Us</h4>
-          123 Main St.<br>
-          Unionville, PA<br>
-          76543<br>
-          +1 (555) 555-1212
+          <h4>Contact Us</h4> 123 Main St.<br> Unionville, PA<br> 76543
+          <br> +1 (555) 555-1212
         </div>
 
       </div>
-      <div class="col-md-6" >
+      <div class="col-md-6">
 
       </div>
-      <div class="col-md-3" >
-        <img src="/assets/map-small.jpg" alt="map-small.jpg" class="pull-right" >
+      <div class="col-md-3">
+        <img
+          src="/assets/map-small.jpg"
+          alt="map-small.jpg"
+          class="pull-right"
+        >
       </div>
     </div>
 
