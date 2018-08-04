@@ -4,5 +4,8 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class User extends Eloquent
 {
-    public $table = 'users';
+    public function testimonials()
+    {
+        return $this->hasMany('Acme\models\Testimonial');
+    }
 }

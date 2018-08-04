@@ -11,8 +11,6 @@ class BaseController
 
     public function __construct()
     {
-      $this->blade = new BladeInstance(__DIR__ . "/../../views", __DIR__ . "/../../views/cache");
+        $this->blade = new BladeInstance(__DIR__ . "/../../views", __DIR__ . "/../../views/cache");
     }
-
-
 }
