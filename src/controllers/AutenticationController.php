@@ -1,5 +1,5 @@
 <?php
-namespace Acme\Controllers;
+namespace Acme\controllers;
 
 use Acme\Validation\Validator;
 use Acme\Models\User;
@@ -7,15 +7,25 @@ use Acme\Auth\LoggedIn;
 
 class AutenticationController extends BaseController
 {
-    public function getShowLoginPage()
+    public function getShowLoginPage($params = null)
     {
         // include(__DIR__. "/../../views/login.html");
         // echo $this->twig->render('login.html');
-        echo $this->blade->render("login");
+        if ($params == null){
+          $params = ['signer' => $this->signer];
+        } else {
+          $params['signer'] = $this->signer;
+        }
+        echo $this->blade->render("login", $params);
     }
 
     public function postShowLoginPage()
     {
+        if (!$this->signer->validateSignature($_REQUEST['_token'])) {
+            header('HTTP/1.0 400 Bad Request');
+            exit;
+        }
+
         $okay = true;
         $email = $_REQUEST['email'];
         $password = $_REQUEST['password'];
@@ -32,17 +42,18 @@ class AutenticationController extends BaseController
         // if not valid, redirect to login page
         if (!$okay) {
             // $_SESSION['msg'] = ["Invalid credentials!"];
-            echo $this->blade->render('login', ['errors' => ["Invalid credentials!"]]);
-            // unset($_SESSION['msg']);
+            $this->getShowLoginPage(['errors' => ["Invalid credentials!"]]);
+            $this.// unset($_SESSION['msg']);
             exit();
         }
 
-        if($user->active == 0){
-          // $_SESSION['msg'] = ["Invalid credentials!"];
-          echo $this->blade->render('login', ['errors' => ["The User is not validated. Verify your email."]]);
-          // unset($_SESSION['msg']);
-          exit();
-
+        if ($user->active == 0) {
+            // $_SESSION['msg'] = ["Invalid credentials!"];
+            $this->getShowLoginPage(
+              ['errors' => ["The User is not validated. Verify your email."]]
+              );
+            // unset($_SESSION['msg']);
+            exit();
         };
         // if valid, log them in
         $_SESSION['user'] = $user;
@@ -51,12 +62,13 @@ class AutenticationController extends BaseController
 
     public function getLogout()
     {
-      unset($_SESSION['user']);
-      session_destroy();
-      header("Location: /login");
+        unset($_SESSION['user']);
+        session_destroy();
+        header("Location: /login");
     }
 
-    public function getTestUser(){
-      dd(LoggedIn::user());
+    public function getTestUser()
+    {
+        dd(LoggedIn::user());
     }
 }

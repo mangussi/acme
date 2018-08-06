@@ -42,11 +42,17 @@
         @include('errormessage')
       </div>
 
+      <div class="row">
+        <div class="col-md-12 push-down" >
+            @yield('content')
+        </div>
+      </div>
 
-      @yield('content')
+
 
     </div>
 
+    <footer class="footer">
     <div class="row footer-background ">
       <div class="col-md-3">
         <div class="padding-left-8px ">
@@ -66,13 +72,21 @@
         >
       </div>
     </div>
+  </footer>
 
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    @if ((Acme\Auth\LoggedIn::user()) && (Acme\Auth\LoggedIn::user()->access_level ==2))
+      <script src="//cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.0/ckeditor.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    @endif
 
     @yield('bottomjs')
+
+    @include('admin.admin-js')
 
   </body>
 

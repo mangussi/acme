@@ -21,6 +21,7 @@
       class="form-horizontal"
       novalidate
     >
+      <input type="hidden" name="_token" value="{!! htmlspecialchars($signer->getSignature()) !!}">
       <div class="form-group row">
         <label
           for="email"

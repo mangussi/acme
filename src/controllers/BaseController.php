@@ -1,6 +1,7 @@
 <?php
-namespace Acme\Controllers;
+namespace Acme\controllers;
 
+use Kunststube\CSRFP\SignatureGenerator;
 use duncan3dc\Laravel\BladeInstance;
 
 class BaseController
@@ -8,9 +9,11 @@ class BaseController
     // protected $loader;
     // protected $twig;
     protected $blade;
+    protected $signer;
 
     public function __construct()
     {
-        $this->blade = new BladeInstance(__DIR__ . "/../../views", __DIR__ . "/../../views/cache");
+        $this->signer = new SignatureGenerator(getenv('CSRF_SECRET'));
+        $this->blade = new BladeInstance(getenv('VIEWS_DIRECTORY'), getenv('CACHE_DIRECTORY'));
     }
 }

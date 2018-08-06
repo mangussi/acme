@@ -1,5 +1,5 @@
 <?php
-namespace Acme\Controllers;
+namespace Acme\controllers;
 
 use Acme\Validation\Validator;
 use Acme\models\Testimonial;
