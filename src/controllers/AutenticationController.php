@@ -16,7 +16,7 @@ class AutenticationController extends BaseController
         } else {
           $params['signer'] = $this->signer;
         }
-        echo $this->blade->render("login", $params);
+	echo $this->blade->render("login", $params);
     }
 
     public function postShowLoginPage()

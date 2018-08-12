@@ -11,8 +11,6 @@
 
     <h1>Log In</h1>
     <hr>
-
-
     <form
       name="loginform"
       id="loginform"

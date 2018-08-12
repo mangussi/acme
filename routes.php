@@ -1,10 +1,10 @@
 <?php
+use Acme\controllers\PageController;
 
 //RegisterController
 $router->map('GET', '/register', 'Acme\controllers\RegisterController@getShowRegisterPage', 'register');
 $router->map('POST', '/register', 'Acme\controllers\RegisterController@postShowRegisterPage', 'register_post');
 $router->map('GET', '/verify-account', 'Acme\controllers\RegisterController@getVerifyAccount', 'verify_account');
-
 
 // admin routes
 if ((Acme\Auth\LoggedIn::user()) && (Acme\Auth\LoggedIn::user()->access_level ==2)) {
@@ -48,6 +48,6 @@ $router->map('GET', '/testemail', function () {
 
 
 //PageController
-$router->map('GET', '/page-not-found', 'Acme\controllers\PageController@getShow404', '404');
+$router->map('GET', '/page-not-found', 'PageController@getShow404', '404');
 $router->map('GET', '/', 'Acme\controllers\PageController@getShowHomePage', 'home');
 $router->map('GET', '/[*]', 'Acme\controllers\PageController@getShowPage', 'show');

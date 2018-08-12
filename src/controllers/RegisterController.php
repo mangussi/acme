@@ -1,4 +1,5 @@
 <?php
+
 namespace Acme\controllers;
 
 use Acme\Validation\Validator;
@@ -17,18 +18,20 @@ class RegisterController extends BaseController
         echo $this->blade->render("register");
     }
 
-
+    /**
+     *
+     */
     public function postShowRegisterPage()
     {
         //validate data
-        $errors = [];
+        //$errors = [];
 
         $validation_data = [
-          'first_name' => 'min:3',
-          'last_name' => 'min:3',
-          'email' => 'email|equalTo:verify_email|unique:User',
-          'verify_email' => 'email',
-          'password' => 'min:3|equalTo:verify_password',
+            'last_name'    => 'min:3',
+            'first_name'   => 'min:3',
+            'email'        => 'email|equalTo:verify_email|unique:User',
+            'verify_email' => 'email',
+            'password'     => 'min:3|equalTo:verify_password',
         ];
 
         $validator = new Validator();
@@ -41,6 +44,8 @@ class RegisterController extends BaseController
             echo $this->blade->render("register", ['errors' => $errors]);
             exit();
         }
+
+
         // if validation fails, go back to register
         // and display error message
         $user = new User();
@@ -58,38 +63,42 @@ class RegisterController extends BaseController
         $user_pending->save();
 
         // SEND Email
-        $message = $this->blade->render('emails.welcome-email',
-            ['token'=> $token]
-          );
+        $message = $this->blade->render('emails.welcome-email', ['token' => $token]);
         SendEmail::sendEmail($user->email, "Welcome to Acme", $message);
 
         header("Location: /success");
         exit();
     }
 
+    /**
+     * Function getVerifyAccount
+     * Performs the account verification for a user
+     *
+     * @return null
+     */
     public function getVerifyAccount()
     {
-      $user_id = 0;
-      $token = $_GET['token'];
+        $user_id = 0;
+        $token = $_GET['token'];
 
-      $user_pending = UserPending::where('token', '=', $token)->get();
+        $user_pending = UserPending::where('token', '=', $token)->get();
 
-      foreach ($user_pending as $item ) {
-        $user_id = $item->user_id;
-      }
+        foreach ($user_pending as $item) {
+            $user_id = $item->user_id;
+        }
 
-      // user found?
-      if($user_id == 0){
-        header("Location: /404");
-        exit();
-      }
+        // user found?
+        if ($user_id == 0) {
+            header("Location: /404");
+            exit();
+        }
 
-      $user = User::find($user_id);
-      $user->active = 1;
-      $user->save();
+        $user = User::find($user_id);
+        $user->active = 1;
+        $user->save();
 
-      UserPending::where('token', '=', $token)->delete();
-      header("Location: /account-activated");
+        UserPending::where('token', '=', $token)->delete();
+        header("Location: /account-activated");
 
     }
 

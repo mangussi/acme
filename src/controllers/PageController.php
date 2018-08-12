@@ -1,12 +1,10 @@
 <?php
 namespace Acme\controllers;
 
-use Acme\Models\User;
 use Acme\Models\Page;
 
 class PageController extends BaseController
 {
-
     public function getShowHomePage()
     {
         echo $this->blade->render("home");
@@ -20,7 +18,6 @@ class PageController extends BaseController
 
     public function getShowPage()
     {
-
         $browser_title = "";
         $page_content = "";
         $page_id = 0;
@@ -50,7 +47,5 @@ class PageController extends BaseController
             'page_content' => $page_content,
             'page_id' => $page_id,
           ]);
-
-        // render template
     }
 }
